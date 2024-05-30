@@ -1,0 +1,43 @@
+.card--container {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background-color: #fff; 
+    color: #000; 
+    padding: 20px;
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    width: calc(50% - 20px); 
+}
+
+.card--content {
+    display: flex;
+    flex-direction: column;
+}
+
+.card--header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card--icon {
+    font-size: 2rem; 
+}
+
+.card--number {
+    font-size: 1.2rem;
+}
+
+.card--description {
+    font-size: 0.9rem;
+    color: #666; 
+}
+
+.separator {
+    border: none;
+    border-top: 1px solid #ccc; 
+    margin-top: 10px;
+}

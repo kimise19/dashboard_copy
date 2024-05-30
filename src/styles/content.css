@@ -1,0 +1,15 @@
+.content{
+    width: 90%;
+
+}
+
+.content--header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.header--title{
+    color: #000000;
+}
+
