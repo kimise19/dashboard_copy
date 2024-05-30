@@ -3,12 +3,15 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    width: 100%; 
+    width: 96%;
+    height: 11.6vh;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #CAC8C5;
 }
 
 .header--title {
+    padding-left: 20px;
     font-size: 1.5rem;
-    font-weight: bold;
     margin: 0;
     flex-grow: 1;
 }
@@ -16,16 +19,16 @@
 .header--icons {
     display: flex;
     align-items: center;
-    gap: 40px; 
+    gap: 40px;
 }
 
 .icon {
-    font-size: 1.5rem; 
-    color: #333; 
+    font-size: 1.5rem;
+    color: #333;
     cursor: pointer;
     transition: color 0.3s;
 }
 
 .icon:hover {
-    color: #007bff; 
+    color: #007bff;
 }

@@ -15,11 +15,12 @@ const users = [
         number: "54545",
         icon: <CiMoneyCheck1 />,
         description: "Filtrar",
-    },{
-        title: "Usuarios",
-        number: "113213",
-        icon: <FaUsers />,
-        description: "Actualizar ahora",
+    },
+    {
+        title: "Dinero",
+        number: "54545",
+        icon: <CiMoneyCheck1 />,
+        description: "Filtrar",
     },
     {
         title: "Dinero",
@@ -40,8 +41,8 @@ const Card = () => {
                             <h2>{user.title}</h2>
                         </div>
                         <p className='card--number'>{user.number}</p>
-                        <p className='card--description'>{user.description}</p>
                         <hr className='separator' />
+                        <p className='card--description'>{user.description}</p>
                     </div>
                 </div>
             ))}

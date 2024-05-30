@@ -1,11 +1,11 @@
 import React from 'react';
-import { FiBell, FiSettings } from 'react-icons/fi';
-import '../styles/ContentHeader.css';
+import { FiBell, FiSettings } from "react-icons/fi";
+import '../styles/Header.css';
 
-const ContentHeader = () => {
+const Header = ({ selectedItem }) => {
   return (
     <div className='content--header'>
-      <h1 className='header--title'>DASHBOARD</h1>
+      <h1 className='header--title'>{selectedItem}</h1>
       <div className='header--icons'>
         <FiBell className='icon' />
         <FiSettings className='icon' />
@@ -14,4 +14,4 @@ const ContentHeader = () => {
   );
 };
 
-export default ContentHeader;
+export default Header;

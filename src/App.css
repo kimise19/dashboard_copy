@@ -1,15 +1,17 @@
-.dashboard{
+.dashboard {
   display: flex;
-  gap: 20px;
-  background: #F4F3EF;
+  height: 100vh;
 }
 
-.dashboard--content{
-  background: #fff;
-  flex: 1;
-  border-radius: 20px;
-  padding: 2rem;
+.dashboard--main {
   display: flex;
-  gap: 1.5rem;
-  justify-content: space-between;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.dashboard--content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #f0f2f5;
+  overflow-y: auto;
 }

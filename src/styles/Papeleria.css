@@ -1,0 +1,65 @@
+
+.card-container {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.card {
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 80%; 
+}
+
+.table-container {
+
+    overflow-x: auto; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+
+    color: #51CBCE; 
+    padding: 0px;
+    text-align: left;
+}
+
+td {
+
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.actions {
+
+    display: flex;
+}
+
+.actions span {
+
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.actions span:last-child {
+    margin-right: 0; 
+}
+
+
+.fa-print {
+    color: #32B711; 
+}
+
+.fa-trash {
+    color: #D80D0D; 
+}
