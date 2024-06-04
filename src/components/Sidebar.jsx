@@ -6,8 +6,9 @@ import { FaBasketShopping } from "react-icons/fa6";
 import { MdAddShoppingCart } from "react-icons/md";
 import { FaUserEdit } from "react-icons/fa";
 import "../styles/Sidebar.css";
+import { BiLogOut } from "react-icons/bi";
 
-const Sidebar = ({ onMenuClick }) => {
+const Sidebar = ({ onMenuClick, onLogout }) => {
     return (
         <div className="menu">
             <div className="logo">
@@ -35,6 +36,10 @@ const Sidebar = ({ onMenuClick }) => {
                 <a href="#" className="item" onClick={() => onMenuClick('users', 'Usuarios')}>
                     <FaUserEdit className="logo-icon" />
                     Usuarios
+                </a>
+                <a href="#" className="item" onClick={onLogout}>
+                <BiLogOut  className="logo-icon-out"/>
+                    Cerrar sesión
                 </a>
             </div>
         </div>

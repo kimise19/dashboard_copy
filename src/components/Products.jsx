@@ -22,17 +22,17 @@ const Products = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
-          try {
-            const response = await axios.get(`http://api-shop.somee.com/api/Product/get-all-products?pageNumber=${page}&search=${searchTerm}`);
-            setProducts(response.data.data);
-            setPageCount(response.data.pageCount);
-          } catch (error) {
-            console.error('Error fetching products:', error);
-          }
+            try {
+                const response = await axios.get(`http://api-shop.somee.com/api/Product/get-all-products?pageNumber=${page}&search=${searchTerm}`);
+                setProducts(response.data.data);
+                setPageCount(response.data.pageCount);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
         };
-    
+
         fetchProducts();
-      }, [page, searchTerm]);
+    }, [page, searchTerm]);
 
     const toggleCategoryForm = () => {
         setShowCategoryForm(!showCategoryForm);
@@ -43,14 +43,14 @@ const Products = () => {
     };
     const goToPreviousPage = () => {
         setPage(prevPage => Math.max(prevPage - 1, 1));
-      };
-      const goToNextPage = () => {
+    };
+    const goToNextPage = () => {
         setPage(prevPage => Math.min(prevPage + 1, pageCount));
-      };
-      const handleSearch = event => {
+    };
+    const handleSearch = event => {
         setSearchTerm(event.target.value);
-        setPage(1); // Volver a la primera página al iniciar una nueva búsqueda
-      };
+        setPage(1); 
+    };
     const handleNewProductChange = (event) => {
         const { name, value } = event.target;
         setNewProduct(prevState => ({
@@ -74,7 +74,7 @@ const Products = () => {
             });
 
             console.log("Product created successfully:", response.data);
-           
+
         } catch (error) {
             console.error('Error creating product:', error.response ? error.response.data : error.message);
         }

@@ -5,10 +5,11 @@
 }
 
 .logo img {
-    padding: 20px;
+    padding-left: 25px;
+    padding-bottom: 20px;
     align-items: center;
     width: 35px;
-    height: 33px;
+    height: 35px;
 }
 
 .logo {
@@ -47,11 +48,15 @@
 }
 
 .menu--list .item:hover {
-    background: #27374d;
-    color: #dde6ed;
+
+    color: #67bafa;
 }
 
 
 .logo-icon {
-    font-size: 1.5em;  
+    font-size: 1.5em;
+}
+
+.logo-icon-out{
+    font-size: 1.5em;
 }
