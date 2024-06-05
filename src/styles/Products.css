@@ -15,7 +15,13 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 80%; 
 }
-
+.floating-card label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: left;
+    width: 100%;
+}
 .table-container {
 
     overflow-x: auto; 
@@ -126,6 +132,8 @@ td {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     max-width: 400px;
+    border: 1px solid black; /* Borde negro */
+
 }
 
 .floating-card h3 {
@@ -161,3 +169,56 @@ td {
     background-color: rgba(0, 0, 0, 0.5); 
     z-index: 999; 
 }
+.floating-card .form-group {
+    margin-bottom: 15px;
+}
+.floating-card input[type="text"],
+.floating-card input[type="file"],
+.floating-card input[type="number"],
+.floating-card select {
+    width: calc(100% - 20px); /* Ajuste para mantener un pequeño padding interno */
+    max-width: 350px; /* Un máximo ancho para que no sea demasiado grande */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.button_danger{
+    background-color: red;
+}
+.button_primary{
+    background-color:#32B711;
+}
+/* Contenedor para los inputs de precio y stock */
+.floating-card .price-stock-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 350px;
+}
+
+/* Asegura que los inputs de precio y stock se alineen uno al lado del otro */
+.floating-card .form-group-half {
+    width: calc(50% - 10px); /* Ajusta para un pequeño espacio entre ellos */
+}
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    margin: auto;
+  }
+  
+  .pagination-button {
+    
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+  }
+  
+  .pagination-button:first-child {
+    margin-right: 20px;
+  }
+  
+  .pagination-button:last-child {
+    margin-left: 20px;
+  }
