@@ -50,3 +50,21 @@ export const showErrorAlert = (message) => {
         text: message
     });
 };
+
+
+export const showExitSession = async (callback) => {
+    return Swal.fire({
+        title: '¿Estás seguro?',
+        text: "La sesión se cerrará",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Salir',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            callback();
+        }
+    });
+};

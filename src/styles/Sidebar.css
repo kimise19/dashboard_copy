@@ -6,6 +6,7 @@
 
 .logo img {
     padding-left: 25px;
+    padding-top: 25px;
     padding-bottom: 20px;
     align-items: center;
     width: 35px;
@@ -48,15 +49,17 @@
 }
 
 .menu--list .item:hover {
-
     color: #67bafa;
 }
 
+.menu--list .item.active {
+    color: #51CBCE;
+}
 
 .logo-icon {
     font-size: 1.5em;
 }
 
-.logo-icon-out{
+.logo-icon-out {
     font-size: 1.5em;
 }

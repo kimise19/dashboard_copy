@@ -15,25 +15,26 @@ const Login = ({ onLogin }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
-
+    
         if (!username || !password) {
             setError('Por favor, complete todos los campos.');
             return;
         }
-
+    
         setLoading(true);
-
+    
         try {
             const response = await axios.post('http://api-shop.somee.com/api/Account/login', {
                 email: username,
                 password: password
             });
-
+    
             if (response.status === 200) {
                 const token = response.data.token;
                 const decodedToken = jwtDecode(token);
-
+    
                 if (decodedToken.role === 'Admin') {
+                    localStorage.setItem('token', token); 
                     history.push('/dashboard');
                     onLogin();
                 } else {
@@ -45,7 +46,7 @@ const Login = ({ onLogin }) => {
             }
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
-            setError('Hubo un problema con el servidor. Por favor, inténtalo más tarde.');
+            setError('Credenciales incorrectas.');
         } finally {
             setLoading(false);
         }

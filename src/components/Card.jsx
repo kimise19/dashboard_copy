@@ -6,25 +6,25 @@ import '../styles/Card.css';
 const users = [
     {
         title: "Usuarios",
-        number: "113213",
+        number: "3",
         icon: <FaUsers />,
         description: "Actualizar ahora",
     },
     {
-        title: "Dinero",
-        number: "54545",
+        title: "Pedidos",
+        number: "3",
         icon: <CiMoneyCheck1 />,
-        description: "Filtrar",
+        description: "Actualizar ahora",
     },
     {
-        title: "Dinero",
-        number: "54545",
+        title: "Productos",
+        number: "20",
         icon: <CiMoneyCheck1 />,
-        description: "Filtrar",
+        description: "Actualizar ahora",
     },
     {
-        title: "Dinero",
-        number: "54545",
+        title: "Usuarios",
+        number: "3",
         icon: <CiMoneyCheck1 />,
         description: "Filtrar",
     }
@@ -32,9 +32,9 @@ const users = [
 
 const Card = () => {
     return (
-        <div className='card--container'>
+        <div className='card--container--1'>
             {users.map((user, index) => (
-                <div className='card' key={index}>
+                <div className='card--1' key={index}>
                     <div className='card--content'>
                         <div className='card--header'>
                             <div className='card--icon'>{user.icon}</div>

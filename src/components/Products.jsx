@@ -199,12 +199,9 @@ const Products = () => {
             showEditConfirmation(async () => {
                 const response = await productUpdate(id, formData);
                 console.log("Product updated successfully:", response.data);
-                // Llamar a la API para mostrar todos los productos después de la actualización
                 const updatedResponse = await getAllProducts(page, searchTerm);
                 setProducts(updatedResponse.data);
-                // Cerrar el modal de edición
                 closeEditModal();
-                // Mostrar mensaje de éxito
                 showSuccessAlert('Producto actualizado exitosamente.');
             });
         } catch (error) {
