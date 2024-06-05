@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import '../styles/content.css';
 import { IoPrintOutline } from "react-icons/io5";
 import { FaRegTrashCan } from "react-icons/fa6";
 import '../styles/Papeleria.css'
+import { getAllPrints } from '../services/productService';
+
 const Papeleria = () => {
+    const [prints, setPrints] = useState([]);
+    useEffect(() => {
+        const fetchPrints = async () => {
+            try {
+                const response = await getAllPrints();
+                setPrints(response);
+            } catch (error) {
+                console.error('Error fetching prints:', error);
+            }
+        };
+        fetchPrints();
+    }, []);
+
     return (
         <div>
             <div className="card-container">
@@ -23,13 +38,14 @@ const Papeleria = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Dato 1</td>
-                                    <td>Dato 2</td>
-                                    <td>Dato 3</td>
-                                    <td>Dato 1</td>
-                                    <td>Dato 2</td>
-                                    <td>Dato 3</td>
+                                {prints.map(print=>(
+                                <tr key={print.id}>
+                                    <td>{print.document}</td>
+                                    <td>{print.paperType}</td>
+                                    <td>{print.color}</td>
+                                    <td>{print.sheetFormat}</td>
+                                    <td>{print.banding}</td>
+                                    <td>{print.bandingMaterial}</td>
                                     <td>
                                         <span>
                                             <i className="fas fa-print"></i> {<IoPrintOutline />}
@@ -39,6 +55,7 @@ const Papeleria = () => {
                                         </span>
                                     </td>
                                 </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
