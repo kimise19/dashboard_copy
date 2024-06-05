@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom'; 
+import { useHistory } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
 import logo from '../images/copy xpress.png';
 import '../styles/Login.css';
 
@@ -8,11 +9,20 @@ const Login = ({ onLogin }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-    const history = useHistory(); 
+    const [loading, setLoading] = useState(false);
+    const history = useHistory();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+        setError(null);
+
+        if (!username || !password) {
+            setError('Por favor, complete todos los campos.');
+            return;
+        }
+
+        setLoading(true);
+
         try {
             const response = await axios.post('http://api-shop.somee.com/api/Account/login', {
                 email: username,
@@ -20,15 +30,24 @@ const Login = ({ onLogin }) => {
             });
 
             if (response.status === 200) {
-                history.push('/dashboard'); 
-                onLogin();
+                const token = response.data.token;
+                const decodedToken = jwtDecode(token);
+
+                if (decodedToken.role === 'Admin') {
+                    history.push('/dashboard');
+                    onLogin();
+                } else {
+                    setError('No tienes permiso para acceder a esta sección.');
+                }
             } else {
                 console.error('Inicio de sesión fallido:', response.data);
                 setError('Credenciales incorrectas. Por favor, inténtalo de nuevo.');
             }
-
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
+            setError('Hubo un problema con el servidor. Por favor, inténtalo más tarde.');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -38,7 +57,7 @@ const Login = ({ onLogin }) => {
             <div className="login-card">
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label>Username:</label>
+                        <label>Correo Electrónico:</label>
                         <input
                             type="text"
                             value={username}
@@ -46,15 +65,17 @@ const Login = ({ onLogin }) => {
                         />
                     </div>
                     <div className="form-group">
-                        <label>Password:</label>
+                        <label>Contraseña:</label>
                         <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    <button type="submit" className="login-button">Iniciar Sesión</button>
-                    {error && <p className="error-message">{error}</p>} 
+                    <button type="submit" className="login-button" disabled={loading}>
+                        {loading ? 'Cargando...' : 'Iniciar Sesión'}
+                    </button>
+                    {error && <p className="error-message">{error}</p>}
                 </form>
             </div>
             <a href="/reset-password" className="forgot-password-link">¿Olvidaste tu contraseña?</a>

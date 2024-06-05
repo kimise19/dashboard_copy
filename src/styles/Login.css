@@ -62,4 +62,11 @@
   .forgot-password-link:hover {
     text-decoration: underline;
   }
-  
+  .error-message {
+    margin-top: 10px;
+    color: #ff0000;
+    background-color: #ffe5e5;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ff0000;
+}
