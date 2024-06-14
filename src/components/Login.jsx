@@ -24,7 +24,7 @@ const Login = ({ onLogin }) => {
         setLoading(true);
     
         try {
-            const response = await axios.post('http://api-shop.somee.com/api/Account/login', {
+            const response = await axios.post('https://api-copyxpress.com.kaizensoftwaresa.com/api/Account/login', {
                 email: username,
                 password: password
             });
@@ -32,9 +32,10 @@ const Login = ({ onLogin }) => {
             if (response.status === 200) {
                 const token = response.data.token;
                 const decodedToken = jwtDecode(token);
-    
-                if (decodedToken.role === 'Admin') {
-                    localStorage.setItem('token', token); 
+                console.log('toke decodificado', decodedToken);
+                if (decodedToken.roles[0] === 'Admin') {
+                    localStorage.setItem('token', token);
+                      
                     history.push('/dashboard');
                     onLogin();
                 } else {

@@ -4,9 +4,9 @@ import { IoMdAddCircle } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import React, { useState, useEffect } from 'react';
-import { addNewProduct, deleteExistingProduct, addNewCategory, getAllProducts, getAllCategories,productUpdate} from '../services/productService';
+import { addNewProduct, deleteExistingProduct, addNewCategory, getAllProducts, getAllCategories, productUpdate } from '../services/productService';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
-import { showDeleteConfirmation,showSuccessAlert,showErrorAlert,showEditConfirmation } from './Alert';
+import { showDeleteConfirmation, showSuccessAlert, showErrorAlert, showEditConfirmation } from './Alert';
 const Products = () => {
     const [showCategoryForm, setShowCategoryForm] = useState(false);
     const [showProductForm, setShowProductForm] = useState(false);
@@ -17,16 +17,16 @@ const Products = () => {
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
     const [newProduct, setNewProduct] = useState({
-        CategoryID: '',
-        Image: null,
-        Name: '',
-        Description: '',
-        Price: '',
-        Stock: ''
+        categoryId: '',
+        picture: null,
+        name: '',
+        description: '',
+        price: '',
+        stock: ''
     });
     const [newCategory, setNewCategory] = useState({
-        Name: '',
-        Description: '',
+        name: '',
+        description: '',
     });
     const [productSuccessMessage, setProductSuccessMessage] = useState('');
     const [categorySuccessMessage, setCategorySuccessMessage] = useState('');
@@ -68,10 +68,11 @@ const Products = () => {
     };
 
     const handleNewProductChange = event => {
+        
         const { name, value, files } = event.target;
         setNewProduct(prevState => ({
             ...prevState,
-            [name]: name === 'Image' ? files[0] : value
+            [name]: name === 'picture' ? files[0] : value
         }));
     };
 
@@ -86,15 +87,15 @@ const Products = () => {
             console.log("Product created successfully:", response.data);
             setProductSuccessMessage("¡Producto creado exitosamente!");
             setNewProduct({
-                CategoryID: '',
-                Image: null,
-                Name: '',
-                Description: '',
-                Price: '',
-                Stock: ''
+                categoryId: '',
+                picture: null,
+                name: '',
+                description: '',
+                price: '',
+                stock: ''
             });
             setSelectedCategory('');
-            document.getElementById('image').value = '';
+            document.getElementById('picture').value = '';
             setTimeout(() => setProductSuccessMessage(''), 5000);
         } catch (error) {
             console.error('Error creating product:', error.response ? error.response.data : error.message);
@@ -113,14 +114,13 @@ const Products = () => {
             }
         });
     };
-
-
     const handleCategoryChange = event => {
         const categoryId = event.target.value;
+        console.log("Categoría seleccionada ID:", categoryId);
         setSelectedCategory(categoryId);
         setNewProduct(prevState => ({
             ...prevState,
-            CategoryID: categoryId
+            categoryId: categoryId
         }));
     };
 
@@ -138,8 +138,8 @@ const Products = () => {
             console.log("Category created successfully:", response.data);
             setCategorySuccessMessage("¡Categoría creada exitosamente!");
             setNewCategory({
-                Name: '',
-                Description: '',
+                name: '',
+                description: '',
             });
             const categoriesResponse = await getAllCategories();
             setCategories(categoriesResponse);
@@ -151,31 +151,31 @@ const Products = () => {
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [updatedProduct, setUpdatedProduct] = useState({
-        CategoryID: '',
-        Image: null,
-        Name: '',
-        Description: '',
-        Price: '',
-        Stock: ''
+        categoryId: '',
+        picture: null,
+        name: '',
+        description: '',
+        price: '',
+        stock: ''
     });
     const openEditModal = product => {
         setSelectedProduct(product);
         setUpdatedProduct({
-            CategoryID: product.categoryID,
-            Image: product.image,
-            Name: product.name,
-            Description: product.description,
-            Price: product.price,
-            Stock: product.stock
+            categoryId: product.categoryId,
+            picture: product.picture,
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            stock: product.stock
         });
         setEditModalOpen(true);
     };
-    
+
     const closeEditModal = () => {
         setEditModalOpen(false);
         setSelectedProduct(null);
     };
-    
+
     const handleEditChange = event => {
         const { name, value } = event.target;
         setUpdatedProduct(prevState => ({
@@ -183,19 +183,19 @@ const Products = () => {
             [name]: value
         }));
     };
-    
+
     const updateProduct = async () => {
         try {
             const { id } = selectedProduct;
-    
+
             const formData = new FormData();
-            formData.append('CategoryID', updatedProduct.CategoryID);
-            formData.append('Image', updatedProduct.Image);
-            formData.append('Name', updatedProduct.Name);
-            formData.append('Description', updatedProduct.Description);
-            formData.append('Price', updatedProduct.Price);
-            formData.append('Stock', updatedProduct.Stock);
-    
+            formData.append('categoryId', updatedProduct.categoryId);
+            formData.append('picture', updatedProduct.picture);
+            formData.append('name', updatedProduct.name);
+            formData.append('description', updatedProduct.description);
+            formData.append('price', updatedProduct.price);
+            formData.append('stock', updatedProduct.stock);
+
             showEditConfirmation(async () => {
                 const response = await productUpdate(id, formData);
                 console.log("Product updated successfully:", response.data);
@@ -208,15 +208,15 @@ const Products = () => {
             console.error('Error updating product:', error.response ? error.response.data : error.message);
         }
     };
-    
+
     const handleEditImageChange = event => {
         const file = event.target.files[0];
         setUpdatedProduct(prevState => ({
             ...prevState,
-            Image: file
+            picture: file
         }));
     };
-    
+
     return (
         <div>
             <div className="search-bar">
@@ -240,58 +240,57 @@ const Products = () => {
                     </div>
                 </div>
             </div>
-           {editModalOpen && selectedProduct && (
-    <div className="modal-background">
-        <form onSubmit={e => {
-            e.preventDefault();
-            updateProduct();
-        }}>
-            <div className="floating-card">
-                <h3>EDITAR PRODUCTO</h3>
-                <div className="form-group">
-                    <label htmlFor="editName">Nombre del producto</label>
-                    <input type="text" id="editName" name="Name" value={updatedProduct.Name} onChange={handleEditChange} required />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="editDescription">Descripción</label>
-                    <input type="text" id="editDescription" name="Description" value={updatedProduct.Description} onChange={handleEditChange} required />
-                </div>
-                
-                <div className="form-group">
-                    <label htmlFor="editCategory">Categoría</label>
-                    <select id="editCategory" name="CategoryID" value={updatedProduct.CategoryID} onChange={handleEditChange} required>
-    <option value="">Seleccionar Categoría</option>
-    {categories.map(category => (
-        <option key={category.id} value={category.id}>
-            {category.name}
-        </option>
-    ))}
-</select>
+            {editModalOpen && selectedProduct && (
+                <div className="modal-background">
+                    <form onSubmit={e => {
+                        e.preventDefault();
+                        updateProduct();
+                    }}>
+                        <div className="floating-card">
+                            <h3>EDITAR PRODUCTO</h3>
+                            <div className="form-group">
+                                <label htmlFor="editName">Nombre del producto</label>
+                                <input type="text" id="editName" name="name" value={updatedProduct.name} onChange={handleEditChange} required />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="editDescription">Descripción</label>
+                                <input type="text" id="editDescription" name="description" value={updatedProduct.description} onChange={handleEditChange} required />
+                            </div>
 
+                            <div className="form-group">
+                                <label htmlFor="editCategory">Categoría</label>
+                                <select id="editCategory" name="categoryId" value={updatedProduct.categoryId} onChange={handleEditChange} required>
+                                    <option value="">Seleccionar Categoría</option>
+                                    {categories.map(category => (
+                                        <option key={category.id} value={category.id}>
+                                            {category.name}
+                                        </option>
+                                    ))}
+                                </select>
+
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="editImage">Imagen</label>
+                                <input type="file" id="editImage" name="picture" onChange={handleEditImageChange} accept="image/*" />
+                            </div>
+                            <div className="form-group price-stock-group">
+                                <div className="form-group-half">
+                                    <label htmlFor="editPrice">Precio</label>
+                                    <input type="number" id="editPrice" name="price" value={updatedProduct.price} onChange={handleEditChange} required />
+                                </div>
+                                <div className="form-group-half">
+                                    <label htmlFor="editStock">stock</label>
+                                    <input type="number" id="editStock" name="stock" value={updatedProduct.stock} onChange={handleEditChange} required />
+                                </div>
+                            </div>
+                            <div className="button-group">
+                                <button type="submit" className='button_primary'>Guardar</button>
+                                <button type="button" className='button_danger' onClick={closeEditModal}>Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div className="form-group">
-    <label htmlFor="editImage">Imagen</label>
-    <input type="file" id="editImage" name="Image" onChange={handleEditImageChange} accept="image/*" />
-</div>
-                <div className="form-group price-stock-group">
-                    <div className="form-group-half">
-                        <label htmlFor="editPrice">Precio</label>
-                        <input type="number" id="editPrice" name="Price" value={updatedProduct.Price} onChange={handleEditChange} required />
-                    </div>
-                    <div className="form-group-half">
-                        <label htmlFor="editStock">Stock</label>
-                        <input type="number" id="editStock" name="Stock" value={updatedProduct.Stock} onChange={handleEditChange} required />
-                    </div>
-                </div>
-                {/* Aquí puedes agregar más campos según sea necesario */}
-                <div className="button-group">
-                    <button type="submit" className='button_primary'>Guardar</button>
-                    <button type="button" className='button_danger' onClick={closeEditModal}>Cancelar</button>
-                </div>
-            </div>
-        </form>
-    </div>
-)}
+            )}
 
             {showProductForm && (
                 <div className="modal-background">
@@ -314,24 +313,24 @@ const Products = () => {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="image">Imagen</label>
-                                <input type="file" id="image" name="Image" onChange={handleNewProductChange} required />
+                                <input type="file" id="picture" name="picture" onChange={handleNewProductChange} required />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="name">Nombre del producto</label>
-                                <input type="text" id="name" placeholder="Nombre del producto" name="Name" value={newProduct.Name} onChange={handleNewProductChange} required />
+                                <input type="text" id="name" placeholder="Nombre del producto" name="name" value={newProduct.name} onChange={handleNewProductChange} required />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="description">Descripción</label>
-                                <input type="text" id="description" placeholder="Descripción" name="Description" value={newProduct.Description} onChange={handleNewProductChange} required />
+                                <input type="text" id="description" placeholder="Descripción" name="description" value={newProduct.description} onChange={handleNewProductChange} required />
                             </div>
                             <div className="form-group price-stock-group">
                                 <div className="form-group-half">
                                     <label htmlFor="price">Precio</label>
-                                    <input type="number" id="price" placeholder="Precio" name="Price" value={newProduct.Price} onChange={handleNewProductChange} required />
+                                    <input type="number" id="price" placeholder="Precio" name="price" value={newProduct.price} onChange={handleNewProductChange} required />
                                 </div>
                                 <div className="form-group-half">
                                     <label htmlFor="stock">Stock</label>
-                                    <input type="number" id="stock" placeholder="Stock" name="Stock" value={newProduct.Stock} onChange={handleNewProductChange} required />
+                                    <input type="number" id="stock" placeholder="stock" name="stock" value={newProduct.stock} onChange={handleNewProductChange} required />
                                 </div>
                             </div>
                             <div className="button-group">
@@ -356,11 +355,11 @@ const Products = () => {
                             <h3>NUEVA CATEGORÍA</h3>
                             <div className="form-group">
                                 <label htmlFor="categoryName">Nombre de la categoría</label>
-                                <input type="text" id="categoryName" name="Name" placeholder="Nombre de la categoría" value={newCategory.Name} onChange={handleNewCategoryChange} required />
+                                <input type="text" id="categoryName" name="name" placeholder="Nombre de la categoría" value={newCategory.name} onChange={handleNewCategoryChange} required />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="categoryDescription">Descripción de la categoría</label>
-                                <input type="text" id="categoryDescription" name="Description" placeholder="Descripción de la categoría" value={newCategory.Description} onChange={handleNewCategoryChange} required />
+                                <input type="text" id="categoryDescription" name="description" placeholder="Descripción de la categoría" value={newCategory.description} onChange={handleNewCategoryChange} required />
                             </div>
                             <div className="button-group">
                                 <button className='button_primary' type="submit">Guardar</button>
@@ -395,16 +394,16 @@ const Products = () => {
                                     <tr key={product.id}>
                                         <td>{product.name}</td>
                                         <td>
-                                           <img src={`data:image/jpeg;base64,${product.picture}`} alt={product.name} width="50" />
+                                            <img src={`data:image/jpeg;base64,${product.picture}`} alt={product.name} width="50" />
                                         </td>
                                         <td>{product.categoryName}</td>
                                         <td>{product.description}</td>
                                         <td>${product.price.toFixed(2)}</td>
                                         <td>{product.stock}</td>
                                         <td>
-                                        <span onClick={() => openEditModal(product)}>
-    <i className="fas fa-print"></i> <HiOutlinePencilSquare />
-</span>
+                                            <span onClick={() => openEditModal(product)}>
+                                                <i className="fas fa-print"></i> <HiOutlinePencilSquare />
+                                            </span>
                                             <span onClick={() => deleteProduct(product.id)}>
                                                 <i className="fas fa-trash"></i> <IoMdClose />
                                             </span>
@@ -415,13 +414,13 @@ const Products = () => {
                         </table>
                     </div>
                     <div className="pagination-container">
-    <button className="pagination-button" onClick={goToPreviousPage} disabled={page === 1}>
-        <FiArrowLeft />
-    </button>
-    <button className="pagination-button" onClick={goToNextPage} disabled={page === pageCount}>
-        <FiArrowRight />
-    </button>
-</div>
+                        <button className="pagination-button" onClick={goToPreviousPage} disabled={page === 1}>
+                            <FiArrowLeft />
+                        </button>
+                        <button className="pagination-button" onClick={goToNextPage} disabled={page === pageCount}>
+                            <FiArrowRight />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
