@@ -7,6 +7,9 @@ import React, { useState, useEffect } from 'react';
 import { addNewProduct, deleteExistingProduct, addNewCategory, getAllProducts, getAllCategories, productUpdate } from '../services/productService';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import { showDeleteConfirmation, showSuccessAlert, showErrorAlert, showEditConfirmation } from './Alert';
+
+
+
 const Products = () => {
     const [showCategoryForm, setShowCategoryForm] = useState(false);
     const [showProductForm, setShowProductForm] = useState(false);
@@ -68,7 +71,7 @@ const Products = () => {
     };
 
     const handleNewProductChange = event => {
-        
+
         const { name, value, files } = event.target;
         setNewProduct(prevState => ({
             ...prevState,
@@ -276,7 +279,7 @@ const Products = () => {
                             <div className="form-group price-stock-group">
                                 <div className="form-group-half">
                                     <label htmlFor="editPrice">Precio</label>
-                                    <input type="number" id="editPrice" name="price" value={updatedProduct.price} onChange={handleEditChange} required />
+                                    <input type="number"  id="editPrice" name="price" value={updatedProduct.price} onChange={handleEditChange} required />
                                 </div>
                                 <div className="form-group-half">
                                     <label htmlFor="editStock">stock</label>
@@ -330,7 +333,7 @@ const Products = () => {
                                 </div>
                                 <div className="form-group-half">
                                     <label htmlFor="stock">Stock</label>
-                                    <input type="number" id="stock" placeholder="stock" name="stock" value={newProduct.stock} onChange={handleNewProductChange} required />
+                                    <input type="number" min="1"  id="stock" placeholder="stock" name="stock" value={newProduct.stock} onChange={handleNewProductChange} required />
                                 </div>
                             </div>
                             <div className="button-group">
@@ -394,7 +397,7 @@ const Products = () => {
                                     <tr key={product.id}>
                                         <td>{product.name}</td>
                                         <td>
-                                            <img src={`data:image/jpeg;base64,${product.picture}`} alt={product.name} width="50" />
+                                            <img src={`https://api-copyxpress.com.kaizensoftwaresa.com/${product.picture}`} alt={product.name} width="50" />
                                         </td>
                                         <td>{product.categoryName}</td>
                                         <td>{product.description}</td>
