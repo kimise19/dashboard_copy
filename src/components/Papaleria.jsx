@@ -48,10 +48,10 @@ const Papeleria = () => {
                                     <td>{print.bandingMaterial}</td>
                                     <td>
                                         <span>
-                                            <i className="fas fa-print"></i> {<IoPrintOutline />}
+                                            <i className="fas fa-print"></i> {<IoPrintOutline className="icon-pencil"/>}
                                         </span>
                                         <span>
-                                            <i className="fas fa-trash"></i> {<FaRegTrashCan />}
+                                            <i className="fas fa-trash"></i> {<FaRegTrashCan className="icon-pencil-1"/>}
                                         </span>
                                     </td>
                                 </tr>

@@ -10,7 +10,7 @@ import Login from './components/Login';
 import ResetPassword from './components/ResetPassword';
 import NewPassword from './components/NewPassword';
 import './App.css';
-import { validateToken } from './helpers/authHelper'; // Ajusta la ruta según tu estructura
+import { validateToken } from './helpers/authHelper'; 
 
 const App = () => {
     const [activeContent, setActiveContent] = useState('dashboard');
@@ -32,7 +32,7 @@ const App = () => {
     };
 
     const handleLogout = () => {
-        localStorage.removeItem('token'); // Elimina el token de localStorage
+        localStorage.removeItem('token'); 
         setIsLoggedIn(false);
         setActiveContent('dashboard');
         setSelectedItem('Dashboard');

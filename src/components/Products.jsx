@@ -11,6 +11,10 @@ import { showDeleteConfirmation, showSuccessAlert, showErrorAlert, showEditConfi
 
 
 const Products = () => {
+    const [selectedProductForCard, setSelectedProductForCard] = useState(null);
+    const [isCardVisible, setIsCardVisible] = useState(false);
+
+
     const [showCategoryForm, setShowCategoryForm] = useState(false);
     const [showProductForm, setShowProductForm] = useState(false);
     const [products, setProducts] = useState([]);
@@ -69,6 +73,20 @@ const Products = () => {
         setSearchTerm(event.target.value);
         setPage(1);
     };
+    const IMAGE_BASE_URL = 'https://api-copyxpress.com.kaizensoftwaresa.com/';
+
+    const handleRowClick = (event, product) => {
+        if (event.target.tagName === 'TD' && event.target.cellIndex === 0) {
+            const productWithImageUrl = {
+                ...product,
+                picture: IMAGE_BASE_URL + product.picture
+            };
+            setSelectedProductForCard(productWithImageUrl);
+            setIsCardVisible(true);
+        }
+    };
+    
+    
 
     const handleNewProductChange = event => {
 
@@ -279,7 +297,7 @@ const Products = () => {
                             <div className="form-group price-stock-group">
                                 <div className="form-group-half">
                                     <label htmlFor="editPrice">Precio</label>
-                                    <input type="number"  id="editPrice" name="price" value={updatedProduct.price} onChange={handleEditChange} required />
+                                    <input type="number" id="editPrice" name="price" value={updatedProduct.price} onChange={handleEditChange} required />
                                 </div>
                                 <div className="form-group-half">
                                     <label htmlFor="editStock">stock</label>
@@ -333,7 +351,7 @@ const Products = () => {
                                 </div>
                                 <div className="form-group-half">
                                     <label htmlFor="stock">Stock</label>
-                                    <input type="number" min="1"  id="stock" placeholder="stock" name="stock" value={newProduct.stock} onChange={handleNewProductChange} required />
+                                    <input type="number" min="1" id="stock" placeholder="stock" name="stock" value={newProduct.stock} onChange={handleNewProductChange} required />
                                 </div>
                             </div>
                             <div className="button-group">
@@ -375,6 +393,19 @@ const Products = () => {
                     </form>
                 </div>
             )}
+            {isCardVisible && (
+                <div className="floating-card">
+                    <div className="card-content">
+                        <h2>{selectedProductForCard.name}</h2>
+                        <img src={selectedProductForCard.picture} alt={selectedProductForCard.name} />
+                        <p><strong>Categoría:</strong> {selectedProductForCard.categoryName}</p>
+                        <p><strong>Descripción:</strong> {selectedProductForCard.description}</p>
+                        <p><strong>Precio:</strong> ${selectedProductForCard.price}</p>
+                        <p><strong>Stock:</strong> {selectedProductForCard.stock}</p>
+                        <button  className='button_danger' onClick={() => setIsCardVisible(false)}>Cerrar</button>
+                    </div>
+                </div>
+            )}
 
             <div className="card-container">
                 <div className="card">
@@ -394,8 +425,8 @@ const Products = () => {
                             </thead>
                             <tbody>
                                 {products.map(product => (
-                                    <tr key={product.id}>
-                                        <td>{product.name}</td>
+                                    <tr key={product.id} onClick={(e) => handleRowClick(e, product)}>
+                                        <td className="product-name">{product.name}</td>
                                         <td>
                                             <img src={`https://api-copyxpress.com.kaizensoftwaresa.com/${product.picture}`} alt={product.name} width="50" />
                                         </td>
@@ -405,10 +436,10 @@ const Products = () => {
                                         <td>{product.stock}</td>
                                         <td>
                                             <span onClick={() => openEditModal(product)}>
-                                                <i className="fas fa-print"></i> <HiOutlinePencilSquare />
+                                                <i className="fas fa-print"></i> <HiOutlinePencilSquare className="icon-pencil" />
                                             </span>
                                             <span onClick={() => deleteProduct(product.id)}>
-                                                <i className="fas fa-trash"></i> <IoMdClose />
+                                                <i className="fas fa-trash"></i> <IoMdClose className="icon-pencil-1" />
                                             </span>
                                         </td>
                                     </tr>

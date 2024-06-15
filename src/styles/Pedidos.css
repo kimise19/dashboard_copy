@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
 }
 
 .card {
@@ -13,12 +13,12 @@
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%; 
+    width: 100%;
 }
 
 .table-container {
 
-    overflow-x: auto; 
+    overflow-x: auto;
 }
 
 table {
@@ -28,14 +28,16 @@ table {
 
 th {
 
-    color: #51CBCE; 
-    padding: 0px;
+    color: #51CBCE;
+    padding-right: 2px;
     text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
 }
 
 td {
 
-    border: 1px solid #ddd;
+    border-bottom: 2px solid #ddd;
     padding: 10px;
 }
 
@@ -51,37 +53,57 @@ td {
 }
 
 .actions span:last-child {
-    margin-right: 0; 
+    margin-right: 0;
 }
 
+.icon-pencil {
+    color: #32B711;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.icon-pencil-1 {
+    color: #BA1515;
+    font-size: 20px;
+    cursor: pointer;
+}
 
 .fa-print {
-    color: #32B711; 
+    color: #32B711;
+}
+
+.icon-pencil:hover {
+    color: #92ec7b;
+}
+
+.icon-pencil-1:hover {
+    color: #ee5959;
 }
 
 .fa-trash {
-    color: #D80D0D; 
+    color: #D80D0D;
 }
+
 .search-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
     padding: 10px;
-    
+
 }
 
 .search-input {
     display: flex;
     align-items: center;
-    position: relative; 
+    position: relative;
 }
 
 .search-icon {
     position: absolute;
-    right: 20px; 
-    color: #000000; 
-    pointer-events: none; 
+    right: 20px;
+    color: #000000;
+    pointer-events: none;
 }
 
 
@@ -90,5 +112,5 @@ td {
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-right: 10px;
-    width: 200px; 
+    width: 200px;
 }

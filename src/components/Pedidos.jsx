@@ -40,10 +40,10 @@ const Pedidos = () => {
                                     <td>Dato 3</td>
                                     <td>
                                         <span>
-                                            <i className="fas fa-print"></i> {<HiOutlinePencilSquare />}
+                                            <i className="fas fa-print"></i> {<HiOutlinePencilSquare className="icon-pencil"/>}
                                         </span>
                                         <span>
-                                            <i className="fas fa-trash"></i> {<IoMdClose />}
+                                            <i className="fas fa-trash"></i> {<IoMdClose className="icon-pencil-1"/>}
                                         </span>
                                     </td>
                                 </tr>

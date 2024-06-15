@@ -15,27 +15,27 @@ const Login = ({ onLogin }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
-    
+
         if (!username || !password) {
             setError('Por favor, complete todos los campos.');
             return;
         }
-    
+
         setLoading(true);
-    
+
         try {
             const response = await axios.post('https://api-copyxpress.com.kaizensoftwaresa.com/api/Account/login', {
                 email: username,
                 password: password
             });
-    
+
             if (response.status === 200) {
                 const token = response.data.token;
                 const decodedToken = jwtDecode(token);
                 console.log('toke decodificado', decodedToken);
                 if (decodedToken.roles[0] === 'Admin') {
                     localStorage.setItem('token', token);
-                      
+
                     history.push('/dashboard');
                     onLogin();
                 } else {

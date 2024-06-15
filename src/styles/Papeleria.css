@@ -27,18 +27,7 @@ table {
     border-collapse: collapse;
 }
 
-th {
 
-    color: #51CBCE; 
-    padding: 0px;
-    text-align: left;
-}
-
-td {
-
-    border: 1px solid #ddd;
-    padding: 10px;
-}
 
 .actions {
 
