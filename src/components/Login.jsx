@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import logo from '../images/copy xpress.png';
 import '../styles/Login.css';
+import { login  } from '../services/productService'
+
 
 const Login = ({ onLogin }) => {
     const [username, setUsername] = useState('');
@@ -24,30 +25,19 @@ const Login = ({ onLogin }) => {
         setLoading(true);
 
         try {
-            const response = await axios.post('https://api-copyxpress.com.kaizensoftwaresa.com/api/Account/login', {
-                email: username,
-                password: password
-            });
-
-            if (response.status === 200) {
-                const token = response.data.token;
-                const decodedToken = jwtDecode(token);
-                console.log('toke decodificado', decodedToken);
-                if (decodedToken.roles[0] === 'Admin') {
-                    localStorage.setItem('token', token);
-
-                    history.push('/dashboard');
-                    onLogin();
-                } else {
-                    setError('No tienes permiso para acceder a esta sección.');
-                }
+            const token = await login(username, password); // Llama a la función login
+            const decodedToken = jwtDecode(token);
+            console.log('Token decodificado:', decodedToken);
+            
+            if (decodedToken.roles[0] === 'Admin') {
+                onLogin();
+                history.push('/dashboard');
             } else {
-                console.error('Inicio de sesión fallido:', response.data);
-                setError('Credenciales incorrectas. Por favor, inténtalo de nuevo.');
+                setError('No tienes permiso para acceder a esta sección.');
             }
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
-            setError('Credenciales incorrectas.');
+            setError('Credenciales incorrectas. Por favor, inténtalo de nuevo.');
         } finally {
             setLoading(false);
         }

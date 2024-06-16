@@ -112,3 +112,34 @@ export const getAllPrints = async () => {
         throw error;
     }
 };
+
+export const getAllUsers = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/user/get-all-users`, {
+            headers: {
+                'Authorization': `Bearer ${getToken()}`
+            }
+        });
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        throw error;
+    }
+};
+
+export const login = async (email, password) => {
+    try {
+        const response = await axios.post(`${API_URL}/account/login`, { email, password });
+        if (response.status === 200) {
+            const token = response.data.token;
+            localStorage.setItem('token', token);
+            return token;
+        } else {
+            throw new Error('Credenciales incorrectas');
+        }
+    } catch (error) {
+        console.error('Error al iniciar sesión:', error);
+        throw error;
+    }
+};

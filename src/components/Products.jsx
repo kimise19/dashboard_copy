@@ -397,7 +397,7 @@ const Products = () => {
                 <div className="floating-card">
                     <div className="card-content">
                         <h2>{selectedProductForCard.name}</h2>
-                        <img src={selectedProductForCard.picture} alt={selectedProductForCard.name} />
+                        <img  src={selectedProductForCard.picture} alt={selectedProductForCard.name} width="175" />
                         <p><strong>Categoría:</strong> {selectedProductForCard.categoryName}</p>
                         <p><strong>Descripción:</strong> {selectedProductForCard.description}</p>
                         <p><strong>Precio:</strong> ${selectedProductForCard.price}</p>

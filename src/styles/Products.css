@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
 }
 
 .card {
@@ -13,8 +13,9 @@
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 80%; 
+    width: 80%;
 }
+
 .floating-card label {
     display: block;
     margin-bottom: 5px;
@@ -22,15 +23,17 @@
     text-align: left;
     width: 100%;
 }
+
 .table-container {
 
-    overflow-x: auto; 
+    overflow-x: auto;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
 }
+
 .actions {
 
     display: flex;
@@ -43,37 +46,38 @@ table {
 }
 
 .actions span:last-child {
-    margin-right: 0; 
+    margin-right: 0;
 }
 
 
 .fa-print {
-    color: #32B711; 
+    color: #32B711;
 }
 
 .fa-trash {
-    color: #D80D0D; 
+    color: #D80D0D;
 }
+
 .search-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
     padding: 10px;
-    
+
 }
 
 .search-input {
     display: flex;
     align-items: center;
-    position: relative; 
+    position: relative;
 }
 
 .search-icon {
     position: absolute;
-    right: 20px; 
-    color: #000000; 
-    pointer-events: none; 
+    right: 20px;
+    color: #000000;
+    pointer-events: none;
 }
 
 
@@ -82,7 +86,7 @@ table {
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-right: 10px;
-    width: 200px; 
+    width: 200px;
 }
 
 .add-options {
@@ -94,20 +98,21 @@ table {
     cursor: pointer;
     display: flex;
     align-items: center;
-    background-color: #D9D9D9; 
-    color: #000000; 
-    padding: 5px 10px; 
-    border-radius: 5px; 
-    margin-right: 10px; 
+    background-color: #D9D9D9;
+    color: #000000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 10px;
 }
 
 .add-option:last-child {
-    margin-right: 0; 
+    margin-right: 0;
 }
 
 .add-option .add-icon {
-    margin-right: 5px; 
+    margin-right: 5px;
 }
+
 .floating-card {
     position: fixed;
     top: 50%;
@@ -119,7 +124,8 @@ table {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     max-width: 400px;
-    border: 1px solid black; /* Borde negro */
+    border: 1px solid black;
+    /* Borde negro */
 
 }
 
@@ -153,29 +159,36 @@ table {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); 
-    z-index: 999; 
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
+
 .floating-card .form-group {
     margin-bottom: 15px;
 }
+
 .floating-card input[type="text"],
 .floating-card input[type="file"],
 .floating-card input[type="number"],
 .floating-card select {
-    width: calc(100% - 20px); /* Ajuste para mantener un pequeño padding interno */
-    max-width: 350px; /* Un máximo ancho para que no sea demasiado grande */
+    width: calc(100% - 20px);
+    /* Ajuste para mantener un pequeño padding interno */
+    max-width: 350px;
+    /* Un máximo ancho para que no sea demasiado grande */
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-bottom: 10px;
 }
-.button_danger{
+
+.button_danger {
     background-color: red;
 }
-.button_primary{
-    background-color:#32B711;
+
+.button_primary {
+    background-color: #32B711;
 }
+
 /* Contenedor para los inputs de precio y stock */
 .floating-card .price-stock-group {
     display: flex;
@@ -186,37 +199,40 @@ table {
 
 /* Asegura que los inputs de precio y stock se alineen uno al lado del otro */
 .floating-card .form-group-half {
-    width: calc(50% - 10px); /* Ajusta para un pequeño espacio entre ellos */
+    width: calc(50% - 10px);
+    /* Ajusta para un pequeño espacio entre ellos */
 }
+
 .pagination-container {
     display: flex;
     justify-content: space-between;
     width: 200px;
     margin: auto;
-  }
-  
-  .pagination-button {
+}
+
+.pagination-button {
     cursor: pointer;
     font-size: 20px;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
-  }
-  
-  .pagination-button:first-child {
+}
+
+.pagination-button:first-child {
     margin-right: 20px;
-  }
-  
-  .pagination-button:last-child {
+}
+
+.pagination-button:last-child {
     margin-left: 20px;
-  }
-  .floating-card img {
-    width: 100px;
-    height: 100px;
+}
+
+.floating-card img {
     border-radius: 8px;
     margin-bottom: 10px;
-    object-fit: cover;
+    object-fit: cover; 
+    
 }
+
 .product-name {
     cursor: pointer;
 }
