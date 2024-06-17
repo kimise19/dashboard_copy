@@ -25,7 +25,7 @@ const Login = ({ onLogin }) => {
         setLoading(true);
 
         try {
-            const token = await login(username, password); // Llama a la función login
+            const token = await login(username, password); 
             const decodedToken = jwtDecode(token);
             console.log('Token decodificado:', decodedToken);
             

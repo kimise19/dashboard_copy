@@ -11,6 +11,7 @@ import ResetPassword from './components/ResetPassword';
 import NewPassword from './components/NewPassword';
 import './App.css';
 import { validateToken } from './helpers/authHelper'; 
+import Users from './components/Users';
 
 const App = () => {
     const [activeContent, setActiveContent] = useState('dashboard');
@@ -56,6 +57,7 @@ const App = () => {
                                     {activeContent === 'stationery' && <Papaleria />}
                                     {activeContent === 'productos' && <Productos />}
                                     {activeContent === 'orders' && <Pedidos />}
+                                    {activeContent === 'users' && <Users />}
                                 </div>
                             </div>
                         </div>

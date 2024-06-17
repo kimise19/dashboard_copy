@@ -1,0 +1,12 @@
+.actions {
+    display: flex;
+}
+
+.actions span {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.actions span:last-child {
+    margin-right: 0;
+}
