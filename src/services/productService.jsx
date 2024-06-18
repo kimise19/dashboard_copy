@@ -143,3 +143,19 @@ export const login = async (email, password) => {
         throw error;
     }
 };
+
+
+export const getAllOrders = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/order/get-all-orders`, {
+            headers: {
+                'Authorization': `Bearer ${getToken()}`
+            }
+        });
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        throw error;
+    }
+};

@@ -106,7 +106,7 @@ const Products = () => {
 
             const response = await addNewProduct(formData);
             console.log("Product created successfully:", response.data);
-            setProductSuccessMessage("¡Producto creado exitosamente!");
+            showSuccessAlert('¡Producto creado exitosamente!');
             setNewProduct({
                 categoryId: '',
                 picture: null,
@@ -157,7 +157,7 @@ const Products = () => {
         try {
             const response = await addNewCategory(newCategory);
             console.log("Category created successfully:", response.data);
-            setCategorySuccessMessage("¡Categoría creada exitosamente!");
+            showSuccessAlert('¡Categoria creado exitosamente!');
             setNewCategory({
                 name: '',
                 description: '',

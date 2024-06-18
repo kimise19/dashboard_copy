@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Content from './components/Content';
 import Papaleria from './components/Papaleria';
@@ -10,7 +10,7 @@ import Login from './components/Login';
 import ResetPassword from './components/ResetPassword';
 import NewPassword from './components/NewPassword';
 import './App.css';
-import { validateToken } from './helpers/authHelper'; 
+import { validateToken } from './helpers/authHelper';
 import Users from './components/Users';
 
 const App = () => {
@@ -33,7 +33,7 @@ const App = () => {
     };
 
     const handleLogout = () => {
-        localStorage.removeItem('token'); 
+        localStorage.removeItem('token');
         setIsLoggedIn(false);
         setActiveContent('dashboard');
         setSelectedItem('Dashboard');
@@ -43,9 +43,11 @@ const App = () => {
         <Router>
             <Switch>
                 <Route path="/reset-password">
-                    <ResetPassword onLogout={handleLogout} />
+                    {isLoggedIn ? <Redirect to="/dashboard" /> : <ResetPassword onLogout={handleLogout} />}
                 </Route>
-                <Route path="/new-password" component={NewPassword} />
+                <Route path="/new-password">
+                    {isLoggedIn ? <Redirect to="/dashboard" /> : <NewPassword />}
+                </Route>
                 <Route path="/">
                     {isLoggedIn ? (
                         <div className="dashboard">
