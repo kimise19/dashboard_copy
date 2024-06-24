@@ -3,8 +3,6 @@ import logo from '../images/copy xpress.png';
 import { useHistory } from 'react-router-dom';
 import '../styles/NewPassword.css';
 
-
-
 const NewPassword = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -12,39 +10,40 @@ const NewPassword = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
     };
 
-    const handleBackToLogin = () => {
-        history.push('/');
-    };
+    
 
     return (
-        <div className="reset-container">
-            <img src={logo} alt="Logo" className="reset-logo" />
-            <h2>Restablecer Contraseña</h2>
+        <div className="login-container">
+            <img src={logo} alt="Logo" className="login-logo" />
+
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label>Nueva Contraseña:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
+                <div className="login-card">
+                    <div className="form-group">
+                        <label>Nueva Contraseña:</label>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Confirmar Contraseña:</label>
+                        <input
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <p><i> Nota: </i>  La contraseña debe tener al menos ocho caracteres.  Para hacerlo más fuerte, utilice letras mayúsculas y minúsculas, números y símbolos.</p>
+                    <button type="submit" className="login-button">Guardar Contraseña</button>
                 </div>
-                <div className="form-group">
-                    <label>Confirmar Contraseña:</label>
-                    <input
-                        type="password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit" className="reset-button">Guardar Contraseña</button>
             </form>
-            <p className="back-to-login" onClick={handleBackToLogin}>Volver al inicio de sesión</p>
         </div>
     );
 };

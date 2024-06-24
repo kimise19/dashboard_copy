@@ -12,7 +12,7 @@ import NewPassword from './components/NewPassword';
 import './App.css';
 import { validateToken } from './helpers/authHelper';
 import Users from './components/Users';
-
+import CheckEmail from './components/MesaggePassword';
 const App = () => {
     const [activeContent, setActiveContent] = useState('dashboard');
     const [selectedItem, setSelectedItem] = useState('Dashboard');
@@ -47,6 +47,9 @@ const App = () => {
                 </Route>
                 <Route path="/new-password">
                     {isLoggedIn ? <Redirect to="/dashboard" /> : <NewPassword />}
+                </Route>
+                <Route path="/check-email">
+                    <CheckEmail />
                 </Route>
                 <Route path="/">
                     {isLoggedIn ? (

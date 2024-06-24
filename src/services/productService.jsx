@@ -159,3 +159,13 @@ export const getAllOrders = async () => {
         throw error;
     }
 };
+
+export const resetPassword = async (email) => {
+    try {
+        const response = await axios.post(`${API_URL}/account/reset-password`, { email });
+        return response.data;
+    } catch (error) {
+        console.error('Error sending reset password email:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+};
