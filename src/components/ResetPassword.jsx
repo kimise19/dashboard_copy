@@ -8,15 +8,20 @@ const ResetPassword = () => {
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
     const history = useHistory();
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             await resetPassword(email);
             history.push('/check-email');
         } catch (error) {
             setError(error.response?.data?.message || 'Hubo un error al enviar el correo electrónico. Por favor, inténtelo de nuevo.');
+        }finally {
+            setLoading(false);
         }
+        
     };
 
     return (
@@ -36,7 +41,7 @@ const ResetPassword = () => {
                             required
                         />
                     </div>
-                    <button type="submit" className="login-button">Obtener nueva contraseña</button>
+                    <button type="submit" className="login-button" disabled={loading}>{loading ? 'Cargando...' : 'Obtener nueva contraseña'}</button>
                 </form>
                 {error && <p className="error-message">{error}</p>}
             </div>

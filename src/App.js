@@ -13,6 +13,8 @@ import './App.css';
 import { validateToken } from './helpers/authHelper';
 import Users from './components/Users';
 import CheckEmail from './components/MesaggePassword';
+import Verification from './components/WelcomePage';
+
 const App = () => {
     const [activeContent, setActiveContent] = useState('dashboard');
     const [selectedItem, setSelectedItem] = useState('Dashboard');
@@ -49,7 +51,10 @@ const App = () => {
                     {isLoggedIn ? <Redirect to="/dashboard" /> : <NewPassword />}
                 </Route>
                 <Route path="/check-email">
-                    <CheckEmail />
+                    {isLoggedIn ? <Redirect to="/dashboard" /> : <CheckEmail />}
+                </Route>
+                <Route path="/verification-email">
+                    {isLoggedIn ? <Redirect to="/dashboard" /> : <Verification />}
                 </Route>
                 <Route path="/">
                     {isLoggedIn ? (

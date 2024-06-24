@@ -169,3 +169,13 @@ export const resetPassword = async (email) => {
         throw error;
     }
 };
+
+export const changePassword = async (token, newPassword) => {
+    try {
+        const response = await axios.post(`${API_URL}/account/change-password/${token}`, { newPassword });
+        return response.data;
+    } catch (error) {
+        console.error('Error changing password:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+};
