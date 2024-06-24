@@ -11,13 +11,21 @@ const NewPassword = () => {
     const [error, setError] = useState('');
     const [showModal, setShowModal] = useState(false);
     const { token } = useParams(); 
+    const [loading, setLoading] = useState(false);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
+        setMessage('');
+        
+        // Validar que las contraseñas coincidan
         if (password !== confirmPassword) {
             setError('Las contraseñas no coinciden.');
             return;
         }
+
+        setLoading(true); // Activar estado de carga
 
         try {
             await changePassword(token, password);
@@ -25,6 +33,8 @@ const NewPassword = () => {
             setShowModal(true);
         } catch (error) {
             setError(error.response?.data?.message || 'Hubo un error al cambiar la contraseña. Por favor, inténtelo de nuevo.');
+        } finally {
+            setLoading(false); // Desactivar estado de carga, independientemente del resultado
         }
     };
 
@@ -32,13 +42,17 @@ const NewPassword = () => {
         setShowModal(false);
     };
 
+
     return (
         <div className="login-container">
             <img src={logo} alt="Logo" className="login-logo" />
+            <div className="info-card-1">
+                <p>Ingrese su nueva contraseña a continuación.</p>
+            </div>
             <form onSubmit={handleSubmit}>
                 <div className="login-card">
                     <div className="form-group">
-                        <label>Nueva Contraseña:</label>
+                        <label>Nueva Contraseña</label>
                         <input
                             type="password"
                             value={password}
@@ -48,7 +62,7 @@ const NewPassword = () => {
                     </div>
 
                     <div className="form-group">
-                        <label>Confirmar Contraseña:</label>
+                        <label>Confirmar Contraseña</label>
                         <input
                             type="password"
                             value={confirmPassword}
@@ -56,8 +70,10 @@ const NewPassword = () => {
                             required
                         />
                     </div>
-                    <p><i> Nota: </i> La contraseña debe tener al menos ocho caracteres. Para hacerlo más fuerte, utilice letras mayúsculas y minúsculas, números y símbolos.</p>
-                    <button type="submit" className="login-button">Guardar Contraseña</button>
+                    <p><i> Nota: </i> La contraseña debe tener al menos ocho caracteres. Utilice letras mayúsculas y minúsculas, números y símbolos.</p>
+                    <button type="submit" className="login-button" disabled={loading}>
+                        {loading ? 'Guardando...' : 'Guardar Contraseña'}
+                    </button>
                     {message && <p className="success-message">{message}</p>}
                     {error && <p className="error-message">{error}</p>}
                 </div>

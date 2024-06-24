@@ -12,7 +12,7 @@ import NewPassword from './components/NewPassword';
 import './App.css';
 import { validateToken } from './helpers/authHelper';
 import Users from './components/Users';
-import CheckEmail from './components/MesaggePassword';
+import CheckEmail from './components/CheckEmail';
 import Verification from './components/WelcomePage';
 
 const App = () => {
@@ -44,14 +44,14 @@ const App = () => {
     return (
         <Router>
             <Switch>
+                <Route path="/check-email">
+                    {isLoggedIn ? <Redirect to="/dashboard" /> : <CheckEmail />}
+                </Route>
                 <Route path="/reset-password">
                     {isLoggedIn ? <Redirect to="/dashboard" /> : <ResetPassword onLogout={handleLogout} />}
                 </Route>
                 <Route path="/new-password">
                     {isLoggedIn ? <Redirect to="/dashboard" /> : <NewPassword />}
-                </Route>
-                <Route path="/check-email">
-                    {isLoggedIn ? <Redirect to="/dashboard" /> : <CheckEmail />}
                 </Route>
                 <Route path="/verification-email">
                     {isLoggedIn ? <Redirect to="/dashboard" /> : <Verification />}

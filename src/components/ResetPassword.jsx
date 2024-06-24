@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
-import '../styles/ResetPassword.css';
-import logo from '../images/copy xpress.png';
 import { useHistory } from 'react-router-dom';
 import { resetPassword } from '../services/productService';
+import logo from '../images/copy xpress.png';
+import '../styles/ResetPassword.css';
 
 const ResetPassword = () => {
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
-    const history = useHistory();
     const [loading, setLoading] = useState(false);
-
+    const routerHistory = useHistory()
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
         setLoading(true);
+
         try {
             await resetPassword(email);
-            history.push('/check-email');
+            
+            routerHistory.push('/check-email'); 
         } catch (error) {
             setError(error.response?.data?.message || 'Hubo un error al enviar el correo electrónico. Por favor, inténtelo de nuevo.');
-        }finally {
+        } finally {
             setLoading(false);
         }
-        
     };
 
     return (
@@ -41,9 +42,11 @@ const ResetPassword = () => {
                             required
                         />
                     </div>
-                    <button type="submit" className="login-button" disabled={loading}>{loading ? 'Cargando...' : 'Obtener nueva contraseña'}</button>
+                    <button type="submit" className="login-button" disabled={loading}>
+                        {loading ? 'Cargando...' : 'Obtener nueva contraseña'}
+                    </button>
+                    {error && <p className="error-message">{error}</p>}
                 </form>
-                {error && <p className="error-message">{error}</p>}
             </div>
             <a href="/" className="back-to-login-link">Volver al inicio de sesión</a>
         </div>

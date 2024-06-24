@@ -19,7 +19,7 @@ const Sidebar = ({ onMenuClick, onLogout }) => {
 
     const handleLogout = () => {
         showExitSession(() => {
-            onLogout(); // Llama a la función onLogout para eliminar el token
+            onLogout(); 
         });
     };
 
