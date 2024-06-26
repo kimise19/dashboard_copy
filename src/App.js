@@ -14,7 +14,7 @@ import { validateToken } from './helpers/authHelper';
 import Users from './components/Users';
 import CheckEmail from './components/CheckEmail';
 import Verification from './components/WelcomePage';
-
+import VerificationModal from './components/VerificationModal';
 const App = () => {
     const [activeContent, setActiveContent] = useState('dashboard');
     const [selectedItem, setSelectedItem] = useState('Dashboard');
@@ -44,6 +44,10 @@ const App = () => {
     return (
         <Router>
             <Switch>
+            
+            <Route path="/password-changed">
+                    {isLoggedIn ? <Redirect to="/dashboard" /> : <VerificationModal />}
+                </Route>
                 <Route path="/check-email">
                     {isLoggedIn ? <Redirect to="/dashboard" /> : <CheckEmail />}
                 </Route>

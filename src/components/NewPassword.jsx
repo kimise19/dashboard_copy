@@ -1,47 +1,48 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation,  } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { changePassword } from '../services/productService';
 import logo from '../images/copy xpress.png';
 import '../styles/NewPassword.css';
 
 const NewPassword = () => {
+    const routerHistory = useHistory()
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const [showModal, setShowModal] = useState(false);
-    const { token } = useParams(); 
     const [loading, setLoading] = useState(false);
 
+    const location = useLocation();
+    const token = new URLSearchParams(location.search).get('token');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setMessage('');
         
-        // Validar que las contraseñas coincidan
         if (password !== confirmPassword) {
             setError('Las contraseñas no coinciden.');
             return;
         }
 
-        setLoading(true); // Activar estado de carga
+        setLoading(true); 
 
         try {
             await changePassword(token, password);
-            setMessage('Contraseña cambiada con éxito.');
+            routerHistory.push('/password-changed');
             setShowModal(true);
         } catch (error) {
             setError(error.response?.data?.message || 'Hubo un error al cambiar la contraseña. Por favor, inténtelo de nuevo.');
         } finally {
-            setLoading(false); // Desactivar estado de carga, independientemente del resultado
+            setLoading(false); 
         }
     };
 
     const closeModal = () => {
         setShowModal(false);
     };
-
 
     return (
         <div className="login-container">

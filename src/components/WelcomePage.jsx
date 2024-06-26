@@ -25,7 +25,7 @@ const Verification = () => {
         <div className="verification-container">
             <img src={logo} alt="Logo" className="verification-logo" />
             <div className="verification-card">
-                <h1 className="verification-title">VERIFICACIÓN</h1>
+                <h1 className="verification-title">Verificación</h1>
                 <FaCircleCheck className="verification-icon" />
                 <p className="verification-message">
                     ¡Tu correo electrónico ha sido verificado con éxito!

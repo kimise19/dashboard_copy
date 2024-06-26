@@ -3,7 +3,7 @@ import { FaCircleCheck } from "react-icons/fa6";
 import logo from '../images/copy xpress.png';
 import '../styles/Verification.css';
 
-const CheckEmail = () => {
+const VerificationModal = () => {
     const [countdown, setCountdown] = useState(5);
 
     useEffect(() => {
@@ -25,11 +25,8 @@ const CheckEmail = () => {
         <div className="verification-container">
             <img src={logo} alt="Logo" className="verification-logo" />
             <div className="verification-card">
-                <h1 className="verification-title">Verificación</h1>
-                <FaCircleCheck className="verification-icon" />
-                <p className="verification-message">
-                    ¡Se a enviado un mensaje a tu correo electrónico!
-                </p>
+                <h1 className="verification-title">Contraseña Actualizada Exitosamente</h1>
+                <FaCircleCheck className="verification-icon" />              
                 <p className="countdown-message">
                     Esta página se cerrará automáticamente en {countdown} segundos.
                 </p>
@@ -39,4 +36,4 @@ const CheckEmail = () => {
     );
 };
 
-export default CheckEmail
+export default VerificationModal;
