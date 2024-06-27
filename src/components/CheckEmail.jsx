@@ -4,7 +4,7 @@ import logo from '../images/copy xpress.png';
 import '../styles/Verification.css';
 
 const CheckEmail = () => {
-    const [countdown, setCountdown] = useState(5);
+    const [countdown, setCountdown] = useState(10);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -14,7 +14,7 @@ const CheckEmail = () => {
         const timeout = setTimeout(() => {
             window.location.href = 'about:blank';
             window.close();
-        }, 5000);
+        }, 10000);
         return () => {
             clearTimeout(timeout);
             clearInterval(timer);

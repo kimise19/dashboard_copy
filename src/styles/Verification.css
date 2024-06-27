@@ -52,3 +52,11 @@
     background-color: #51CBCE;
     transition: width 1s linear;
 }
+.verification-icon.error {
+    
+    color: red;
+}
+
+.verification-icon {
+    font-size: 141px;
+}

@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from 'jwt-decode';
 import logo from '../images/copy xpress.png';
+import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import '../styles/Login.css';
-import { login  } from '../services/productService'
-
+import { login } from '../services/productService';
 
 const Login = ({ onLogin }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const history = useHistory();
@@ -58,11 +59,20 @@ const Login = ({ onLogin }) => {
                     </div>
                     <div className="form-group">
                         <label>Contraseña:</label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
+                        <div className="password-input-container">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="password-toggle-button"
+                            >
+                                {showPassword ? <IoIosEye />: <IoIosEyeOff/> }
+                            </button>
+                        </div>
                     </div>
                     <button type="submit" className="login-button" disabled={loading}>
                         {loading ? 'Cargando...' : 'Iniciar Sesión'}

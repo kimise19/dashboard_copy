@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
-import { useLocation,  } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { changePassword } from '../services/productService';
 import logo from '../images/copy xpress.png';
+import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import '../styles/NewPassword.css';
 
 const NewPassword = () => {
-    const routerHistory = useHistory()
+    const routerHistory = useHistory();
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const location = useLocation();
     const token = new URLSearchParams(location.search).get('token');
@@ -54,22 +56,40 @@ const NewPassword = () => {
                 <div className="login-card">
                     <div className="form-group">
                         <label>Nueva Contraseña</label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
+                        <div className="password-input-container">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="password-toggle-button"
+                            >
+                                {showPassword ? <IoIosEye /> : <IoIosEyeOff/>}
+                            </button>
+                        </div>
                     </div>
 
                     <div className="form-group">
                         <label>Confirmar Contraseña</label>
-                        <input
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
-                        />
+                        <div className="password-input-container">
+                            <input
+                                type={showConfirmPassword ? "text" : "password"}
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                className="password-toggle-button"
+                            >
+                                {showConfirmPassword ?<IoIosEye /> : <IoIosEyeOff /> }
+                            </button>
+                        </div>
                     </div>
                     <p><i> Nota: </i> La contraseña debe tener al menos ocho caracteres. Utilice letras mayúsculas y minúsculas, números y símbolos.</p>
                     <button type="submit" className="login-button" disabled={loading}>
