@@ -31,6 +31,12 @@ export const addNewProduct = async (formData) => {
                 'Authorization': `Bearer ${getToken()}`
             }
         });
+        const notificationData = {
+            heading: 'Descubre Nuevos Productos para Ti',
+            content: `${formData.get('name')} Esperan por ti`
+        };
+        await sendNotificationToAll(notificationData);
+
         return response.data;
     } catch (error) {
         console.error('Error creating product:', error.response ? error.response.data : error.message);
@@ -176,6 +182,30 @@ export const changePassword = async (token, newPassword) => {
         return response.data;
     } catch (error) {
         console.error('Error changing password:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+};
+
+export const sendNotificationToAll = async (notificationData) => {
+    try {
+        const response = await axios.post(`${API_URL}/notification/send-notification-to-all`, notificationData, {
+            headers: {
+                'Authorization': `Bearer ${getToken()}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error sending notification:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+};
+
+export const verifyEmail = async (token) => {
+    try {
+        const response = await axios.get(`${API_URL}/account/verify-email/${token}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error verifying email:', error.response ? error.response.data : error.message);
         throw error;
     }
 };
